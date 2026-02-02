@@ -190,6 +190,15 @@ const GameCanvas: React.FC<GameCanvasProps> = ({ gameState, setGameState, jumpMo
     }
     ctx.lineTo(w, h);
     ctx.fill();
+
+    // Welcome Text Background
+    ctx.save();
+    ctx.font = 'bold 48px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+    ctx.fillText('Welcome to the Kilo DeveloperWeek Hackathon!', w / 2, h / 2);
+    ctx.restore();
   };
 
   const drawPlatform = (ctx: CanvasRenderingContext2D, entity: LevelEntity, cameraX: number, cameraY: number) => {
