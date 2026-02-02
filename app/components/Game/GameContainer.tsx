@@ -9,6 +9,7 @@ const GameContainer: React.FC = () => {
   const [gameState, setGameState] = useState<GameStatus>('start');
   const [jumpModifier, setJumpModifier] = useState<number>(1.0);
   const [completionData, setCompletionData] = useState<CompletionData | null>(null);
+  const [playerName, setPlayerName] = useState<string>('');
   const startTimeRef = useRef<number>(0);
 
   // Calculate points based on completion time
@@ -41,6 +42,11 @@ const GameContainer: React.FC = () => {
     }
   }, [gameState]);
 
+  const handleStartGame = (name: string) => {
+    setPlayerName(name);
+    setGameState('playing');
+  };
+
   const handleRestart = () => {
     setGameState('playing');
   };
@@ -57,7 +63,9 @@ const GameContainer: React.FC = () => {
         jumpModifier={jumpModifier}
         setJumpModifier={setJumpModifier}
         onRestart={handleRestart}
+        onStartGame={handleStartGame}
         completionData={completionData}
+        playerName={playerName}
       />
     </div>
   );

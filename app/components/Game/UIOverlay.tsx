@@ -6,7 +6,9 @@ interface UIOverlayProps {
   jumpModifier: number;
   setJumpModifier: (val: number) => void;
   onRestart: () => void;
+  onStartGame: (name: string) => void;
   completionData: CompletionData | null;
+  playerName: string;
 }
 
 const UIOverlay: React.FC<UIOverlayProps> = ({
@@ -14,14 +16,32 @@ const UIOverlay: React.FC<UIOverlayProps> = ({
   jumpModifier,
   setJumpModifier,
   onRestart,
+  onStartGame,
   completionData,
+  playerName,
 }) => {
+  const [nameInput, setNameInput] = React.useState('');
+
+  const handleStartClick = () => {
+    if (nameInput.trim()) {
+      onStartGame(nameInput.trim());
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && nameInput.trim()) {
+      handleStartClick();
+    }
+  };
   return (
     <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-6">
       {/* Top Bar: Controls */}
       <div className="flex justify-between items-start pointer-events-auto">
         <div className="bg-black/80 border border-yellow-500 p-4 rounded text-yellow-500 font-mono">
           <h1 className="text-xl font-bold mb-2">KILO MAN</h1>
+          {playerName && (
+            <p className="text-sm mb-2 text-yellow-300">Player: {playerName}</p>
+          )}
           <div className="flex flex-col gap-2">
             <label htmlFor="jump-slider" className="text-sm">
               Jump Power: {(jumpModifier * 100).toFixed(0)}%
@@ -85,12 +105,31 @@ const UIOverlay: React.FC<UIOverlayProps> = ({
       {/* Start Screen Overlay */}
       {gameState === 'start' && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/90 pointer-events-auto">
-          <div className="text-center">
+          <div className="text-center max-w-md">
             <h1 className="text-6xl font-bold text-yellow-500 mb-4 tracking-tighter">KILO MAN</h1>
             <p className="text-white font-mono mb-8">Use Arrow Keys to Move • Space to Jump</p>
+            
+            <div className="mb-6">
+              <label htmlFor="player-name" className="block text-yellow-400 font-mono mb-2 text-lg">
+                Enter Your Name
+              </label>
+              <input
+                id="player-name"
+                type="text"
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Agent Name"
+                maxLength={20}
+                className="w-full px-4 py-3 bg-black border-2 border-yellow-500 text-yellow-400 font-mono text-center text-xl rounded focus:outline-none focus:border-yellow-300 placeholder-yellow-700"
+                autoFocus
+              />
+            </div>
+            
             <button
-              onClick={onRestart}
-              className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-4 px-10 rounded text-xl font-mono transition-colors"
+              onClick={handleStartClick}
+              disabled={!nameInput.trim()}
+              className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-4 px-10 rounded text-xl font-mono transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed disabled:text-gray-400"
             >
               START GAME
             </button>

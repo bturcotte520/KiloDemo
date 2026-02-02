@@ -46,6 +46,10 @@ export interface CompletionData {
   points: number;
 }
 
+export interface GameState {
+  playerName: string;
+}
+
 export interface GameConfig {
   gravity: number;
   friction: number;
