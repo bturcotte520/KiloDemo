@@ -5,11 +5,57 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Classic Theme (Yellow/Black - Default) */
+:root,
+[data-theme="classic"] {
+  --theme-bg: #000000;
+  --theme-text: #eab308;
+  --theme-accent: #eab308;
+  --theme-accent-text: #000000;
+  --theme-border: #eab308;
+  --theme-panel: rgba(0, 0, 0, 0.8);
+  --theme-button: rgba(234, 179, 8, 0.2);
+  --theme-button-text: #eab308;
+  --theme-button-hover: rgba(234, 179, 8, 0.3);
+}
+
+/* Dark Theme (Blue/Gray) */
+[data-theme="dark"] {
+  --theme-bg: #0f172a;
+  --theme-text: #94a3b8;
+  --theme-accent: #3b82f6;
+  --theme-accent-text: #ffffff;
+  --theme-border: #475569;
+  --theme-panel: rgba(15, 23, 42, 0.9);
+  --theme-button: rgba(59, 130, 246, 0.2);
+  --theme-button-text: #60a5fa;
+  --theme-button-hover: rgba(59, 130, 246, 0.3);
+}
+
+/* Neon Theme (Cyan/Purple) */
+[data-theme="neon"] {
+  --theme-bg: #1a0033;
+  --theme-text: #00ffff;
+  --theme-accent: #ff00ff;
+  --theme-accent-text: #ffffff;
+  --theme-border: #00ffff;
+  --theme-panel: rgba(26, 0, 51, 0.9);
+  --theme-button: rgba(0, 255, 255, 0.2);
+  --theme-button-text: #00ffff;
+  --theme-button-hover: rgba(0, 255, 255, 0.3);
+}
+
+@theme {
+  /* Theme colors for Tailwind */
+  --color-theme-bg: var(--theme-bg);
+  --color-theme-text: var(--theme-text);
+  --color-theme-accent: var(--theme-accent);
+  --color-theme-accent-text: var(--theme-accent-text);
+  --color-theme-border: var(--theme-border);
+  --color-theme-panel: var(--theme-panel);
+  --color-theme-button: var(--theme-button);
+  --color-theme-button-text: var(--theme-button-text);
+  --color-theme-button-hover: var(--theme-button-hover);
 }
 
 @media (prefers-color-scheme: dark) {
