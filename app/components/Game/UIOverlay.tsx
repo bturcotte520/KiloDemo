@@ -88,16 +88,67 @@ const UIOverlay: React.FC<UIOverlayProps> = ({
       
       {/* Start Screen Overlay */}
       {gameState === 'start' && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/90 pointer-events-auto">
-          <div className="text-center">
-            <h1 className="text-6xl font-bold text-theme-accent mb-4 tracking-tighter">KILO MAN</h1>
-            <p className="text-white font-mono mb-8">Use Arrow Keys to Move • Space to Jump</p>
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-auto animate-fade-in scanline-overlay"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.92) 70%, rgba(0,0,0,0.98) 100%)',
+          }}
+        >
+          <div className="text-center max-w-lg w-full mx-4 px-8 py-10 rounded-2xl border border-theme-border/30 relative"
+            style={{
+              background: 'linear-gradient(180deg, color-mix(in srgb, var(--theme-panel) 80%, transparent) 0%, var(--theme-panel) 100%)',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.5), 0 0 40px color-mix(in srgb, var(--theme-accent) 8%, transparent)',
+              backdropFilter: 'blur(12px)',
+            }}
+          >
+            {/* Decorative top accent line */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 rounded-b-full animate-slide-up"
+              style={{ background: 'linear-gradient(90deg, transparent, var(--theme-accent), transparent)' }}
+            />
+
+            {/* Title */}
+            <h1 className="text-6xl sm:text-7xl font-bold text-theme-accent mb-2 tracking-tighter animate-slide-up animate-title-glow"
+              style={{ fontFamily: "'Arial Black', 'Impact', sans-serif" }}
+            >
+              KILO MAN
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-theme-text/60 text-sm font-mono mb-6 animate-slide-up-delay-1 tracking-widest uppercase">
+              Prepare for the mission
+            </p>
+
+            {/* Divider */}
+            <div className="start-divider w-full mb-6 animate-slide-up-delay-1" />
+
+            {/* Controls */}
+            <div className="flex flex-wrap justify-center gap-4 mb-8 animate-slide-up-delay-2">
+              <div className="flex items-center gap-2">
+                <span className="key-badge">←</span>
+                <span className="key-badge">→</span>
+                <span className="text-theme-text/70 text-xs font-mono ml-1">Move</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="key-badge">SPACE</span>
+                <span className="text-theme-text/70 text-xs font-mono ml-1">Jump</span>
+              </div>
+            </div>
+
+            {/* Start Button */}
             <button
               onClick={onRestart}
-              className="bg-theme-accent hover:opacity-90 text-theme-accent-text font-bold py-4 px-10 rounded text-xl font-mono transition-opacity"
+              className="start-btn bg-theme-accent text-theme-accent-text font-bold py-4 px-12 rounded-xl text-lg font-mono animate-slide-up-delay-3 animate-pulse-subtle"
             >
               START GAME
             </button>
+
+            {/* Bottom decorative dots */}
+            <div className="flex justify-center gap-1.5 mt-6 animate-slide-up-delay-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-theme-accent/40" />
+              <span className="w-1.5 h-1.5 rounded-full bg-theme-accent/60" />
+              <span className="w-1.5 h-1.5 rounded-full bg-theme-accent" />
+              <span className="w-1.5 h-1.5 rounded-full bg-theme-accent/60" />
+              <span className="w-1.5 h-1.5 rounded-full bg-theme-accent/40" />
+            </div>
           </div>
         </div>
       )}
