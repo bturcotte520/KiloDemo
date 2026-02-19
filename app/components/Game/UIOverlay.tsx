@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { GameStatus, CompletionData } from './types';
 import ThemeSelector from '../ThemeSelector';
 
@@ -46,6 +47,12 @@ const UIOverlay: React.FC<UIOverlayProps> = ({
             <p>ARROWS: Move</p>
             <p>SPACE: Jump</p>
           </div>
+          <Link
+            href="/credits"
+            className="bg-theme-button border border-theme-border px-4 py-2 rounded text-theme-button-text font-mono text-xs font-bold text-center hover:bg-theme-button-hover transition-colors"
+          >
+            CREDITS
+          </Link>
         </div>
       </div>
 
